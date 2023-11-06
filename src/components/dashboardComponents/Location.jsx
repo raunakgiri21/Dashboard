@@ -49,7 +49,7 @@ export default function Location() {
         <div className="flex gap-5">
           <div className="flex justify-center items-center gap-2">
             <div
-              className={`w-3 h-3 rounded-md bg-green-300 flex justify-center items-center`}
+              className={`w-3 h-3 rounded-md bg-[#00f2de] flex justify-center items-center`}
             ></div>
             <p className="text-slate-400 text-sm">Country</p>
           </div>
@@ -62,7 +62,10 @@ export default function Location() {
         </div>
       </div>
       <div>
-        <ResponsiveContainer width='100%' height={300}>
+        <ResponsiveContainer
+          width="100%"
+          height={300}
+        >
           <BarChart
             width={350}
             height={300}
@@ -90,7 +93,7 @@ export default function Location() {
             <Bar
               dataKey="uv"
               stackId="a"
-              fill="rgb(134,239,172)"
+              fill="#00f2de"
             />
           </BarChart>
         </ResponsiveContainer>

@@ -11,8 +11,8 @@ import ConversionRate from "./dashboardComponents/ConversionRate";
 export default function Dashboard() {
   return (
     <div className="flex flex-col h-full">
-      <div className="flex h-1/2 gap-4">
-        <div className="flex flex-col w-1/4 gap-3">
+      <div className="flex flex-col md:flex-row md:h-1/2 h-full gap-4">
+        <div className="grid md:grid-cols-1 md:w-1/4 md:h-full h-1/2 min-h-[400px] gap-3">
           <BarStats
             bg="bg-blue-500"
             title="Total Visits"
@@ -60,12 +60,12 @@ export default function Dashboard() {
             }
           />
         </div>
-        <UserTraffic />
+        <UserTraffic className="h-1/2" />
       </div>
-      <div className="h-1/2 flex gap-5 mt-5 mb-2">
+      <div className="md:h-1/2 h-full w-full min-h-[368px] flex md:flex-row flex-col gap-5 mt-5 mb-2">
         <Location />
-        <ConversionRate/>
-        <WebsiteAnalytics/>
+        <ConversionRate />
+        <WebsiteAnalytics />
       </div>
     </div>
   );

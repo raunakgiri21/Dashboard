@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Location() {
   return (
-    <div className=" w-1/3 h-full flex flex-row bg-inherit border border-slate-800 rounded-xl shadow-shadowOne py-2 px-5">
+    <div className=" md:w-1/3 w-full h-full min-h-[368px] flex flex-row bg-inherit border border-slate-800 rounded-xl shadow-shadowOne py-2 px-5">
       <div className="flex h-12 w-full justify-between items-center gap-5">
         <div>
           <p className="text-xl text-white font-semibold">Location</p>

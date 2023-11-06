@@ -17,7 +17,7 @@ export default function BarStats({bg='bg-blue-400',icon, title='Total Visits', v
   }
 
   return (
-    <div className="flex flex-row w-full h-1/4 bg-inherit border border-slate-800 rounded-xl shadow-shadowOne">
+    <div className="flex flex-row w-full h-full bg-inherit border border-slate-800 rounded-xl shadow-shadowOne">
       <div className="flex w-20 justify-center items-center">
         <div
           className={`w-12 h-12 rounded-md ${bg} flex justify-center items-center`}

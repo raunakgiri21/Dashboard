@@ -7,3 +7,6 @@
     @apply w-full h-8 bg-purple-800 bg-opacity-10 text-sm text-gray-300 flex justify-center cursor-pointer hover:bg-opacity-20 duration-300 items-center border-[1px] rounded-none px-3;
   }
 }
+::-webkit-scrollbar {
+  display: none;
+}

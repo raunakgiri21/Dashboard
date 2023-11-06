@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Layout from "./components/shared/LAyout";
+import Layout from "./components/shared/Layout";
 import Dashboard from "./components/Dashboard";
 
 function App() {

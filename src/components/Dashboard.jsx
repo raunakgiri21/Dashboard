@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BarStats from "./dashboardComponents/BarStats";
 import { BsArrowDownLeft, BsArrowUpRight } from "react-icons/bs";
 import { TbChartCandleFilled } from "react-icons/tb";
@@ -7,8 +7,25 @@ import UserTraffic from "./dashboardComponents/UserTraffic";
 import Location from "./dashboardComponents/Location";
 import WebsiteAnalytics from "./dashboardComponents/WebsiteAnalytics";
 import ConversionRate from "./dashboardComponents/ConversionRate";
+import { barStats } from "../constants/constants";
 
 export default function Dashboard() {
+  const [data, setData] = useState({
+    totalSubscribers: 0,
+    totalVisits: 0,
+    totalVisitsIncrease: 0,
+    totalSubscribersIncrease: 0,
+    activeUsers: 0,
+    totalClicks: 0,
+  });
+
+  useEffect(() => {
+    const index = Math.floor(Math.random() * barStats.length);
+    const myData = barStats[index];
+    console.log(myData)
+    setData(myData);
+  }, []);
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex flex-col md:flex-row md:h-1/2 h-full gap-4">
@@ -16,8 +33,8 @@ export default function Dashboard() {
           <BarStats
             bg="bg-blue-500"
             title="Total Visits"
-            value="6300"
-            percent={1.29}
+            value={data?.totalVisits}
+            percent={data?.totalVisitsIncrease}
             icon={
               <BsArrowDownLeft
                 className="text-white"
@@ -28,8 +45,8 @@ export default function Dashboard() {
           <BarStats
             bg="bg-orange-400"
             title="Total Subscribers"
-            value="32"
-            percent={-1.29}
+            value={data?.totalSubscribers}
+            percent={data?.totalSubscribersIncrease}
             icon={
               <BsArrowUpRight
                 className="text-white"
@@ -40,7 +57,7 @@ export default function Dashboard() {
           <BarStats
             bg="bg-green-500"
             title="Active Users"
-            value="20"
+            value={data?.activeUsers}
             icon={
               <TbChartCandleFilled
                 className="text-white"
@@ -51,7 +68,7 @@ export default function Dashboard() {
           <BarStats
             bg="bg-purple-500"
             title="Total Clicks"
-            value="199"
+            value={data?.totalClicks}
             icon={
               <BsGraphUpArrow
                 className="text-white"

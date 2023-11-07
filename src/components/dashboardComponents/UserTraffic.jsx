@@ -9,6 +9,7 @@ import {
   ReferenceLine,
   ResponsiveContainer,
   Cell,
+  Tooltip,
 } from "recharts";
 import { userTrafficData } from "../../constants/constants";
 
@@ -74,7 +75,7 @@ export default function UserTraffic() {
               left: -10,
               bottom: 0,
             }}
-            barSize={30}
+            barSize={75}
           >
             <CartesianGrid
               strokeDasharray="3 3"
@@ -82,7 +83,7 @@ export default function UserTraffic() {
             />
             <XAxis dataKey="name" />
             <YAxis />
-            {/* <Tooltip /> */}
+            <Tooltip />
             <ReferenceLine
               y={0}
               stroke="#000"

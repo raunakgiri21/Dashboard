@@ -9,56 +9,27 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
-const data = [
-  {
-    month: "Nov",
-    week: "last week",
-    year: "2022",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    month: "Jan",
-    week: "w-1",
-    year: "2023",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    month: "Feb",
-    week: "w-2",
-    year: "2024",
-    uv: 2000,
-    pv: 7800,
-    amt: 2290,
-  },
-  {
-    month: "Mar",
-    week: "w-3",
-    year: "2025",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    month: "Apr",
-    week: "w-4",
-    year: "2026",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-];
+import { websiteAnalyticsData } from "../../constants/constants";
+import axios from "axios";
 
 export default function WebsiteAnalytics() {
-  const [analyticsState, setAnalyticsState] = useState("month"); // [weekly, monthly, yearly]
+  const [analyticsState, setAnalyticsState] = useState("month");
+  const [data, setData] = useState(websiteAnalyticsData) // [weekly, monthly, yearly]
   
   useEffect(() => {
-
+    getWebsiteData();
   }, [analyticsState]);
+
+  const getWebsiteData = async() => {
+    try {
+      const { data: myData } = await axios.get(
+        "https://mocki.io/v1/9f7b0255-eaac-4b8c-b01f-018fea9f2532"
+      );
+      setData(myData)
+    } catch (error) {
+      console.log("Error getting websiteAnalytics data: ",error)
+    }
+  }
 
   return (
     <div className="md:w-1/3 w-full h-full min-h-[368px] flex flex-col bg-inherit border border-slate-800 rounded-xl shadow-shadowOne py-4 px-5">

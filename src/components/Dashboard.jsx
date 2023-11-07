@@ -8,6 +8,7 @@ import Location from "./dashboardComponents/Location";
 import WebsiteAnalytics from "./dashboardComponents/WebsiteAnalytics";
 import ConversionRate from "./dashboardComponents/ConversionRate";
 import { barStats } from "../constants/constants";
+import axios from "axios";
 
 export default function Dashboard() {
   const [data, setData] = useState({
@@ -18,13 +19,24 @@ export default function Dashboard() {
     activeUsers: 0,
     totalClicks: 0,
   });
-
+  
   useEffect(() => {
     const index = Math.floor(Math.random() * barStats.length);
     const myData = barStats[index];
-    console.log(myData)
     setData(myData);
+    getBarStatsData();
   }, []);
+
+  const getBarStatsData = async() => {
+    try {
+      const {data} = await axios.get(
+        "https://mocki.io/v1/a30688f2-a260-47ae-ad9d-76f759939e5a"
+      );
+      setData(data)
+    } catch (error) {
+      console.log("Error getting api-data for barStats:",error)
+    }
+  }
 
   return (
     <div className="flex flex-col h-full">

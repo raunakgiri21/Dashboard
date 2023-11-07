@@ -1,14 +1,31 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { PieChart, Pie, Sector, Cell } from "recharts";
 
-const data = [
-  { name: "Group A", value: 13124213 },
-  { name: "Group B", value: 5124213 },
-  { name: "Group C", value: 3124213 },
-];
 const COLORS = ["#3f46f7", "#3e3192", "#2a165e"];
 
 export default function ConversionRate() {
+  const [data, setData] = useState([
+    { name: "Total User Visit", value: 2500 },
+    { name: "User Sign Up", value: 1000 },
+    { name: "User Subscribed", value: 1000 },
+  ]);
+
+  useEffect(() => {
+    getPieData();
+  },[])
+
+  const getPieData = async() => {
+    try {
+      const {data: myData} = await axios.get(
+        "https://mocki.io/v1/38f24515-1b62-41fc-9a8e-c3b7ee329ee3"
+      );
+      setData(myData)
+    } catch (error) {
+      console.log("Error getting PieChartData: ",error)
+    }
+  }
+
   return (
     <div className=" md:w-1/3 w-full h-full min-h-[368px] flex flex-col bg-inherit border border-slate-800 rounded-xl shadow-shadowOne py-4 px-5">
       <div className="flex flex-col h-12 w-full justify-between gap-2">
@@ -31,7 +48,6 @@ export default function ConversionRate() {
               paddingAngle={5}
               dataKey="value"
             >
-              Label
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
@@ -49,7 +65,9 @@ export default function ConversionRate() {
               ></div>
               <p className="text-slate-500 text-sm">Total User Visit</p>
             </div>
-            <p className="text-white pl-8 text-sm">{(13124213).toLocaleString()} users</p>
+            <p className="text-white pl-8 text-sm">
+              {(data[0]?.value).toLocaleString()} users
+            </p>
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -58,7 +76,9 @@ export default function ConversionRate() {
               ></div>
               <p className="text-slate-500 text-sm">User Sign Up</p>
             </div>
-            <p className="text-white pl-8 text-sm">{(5124213).toLocaleString()} users</p>
+            <p className="text-white pl-8 text-sm">
+              {(data[1]?.value).toLocaleString()} users
+            </p>
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -67,7 +87,9 @@ export default function ConversionRate() {
               ></div>
               <p className="text-slate-500 text-sm">User Subscribed</p>
             </div>
-            <p className="text-white pl-8 text-sm">{(3124213).toLocaleString()} users</p>
+            <p className="text-white pl-8 text-sm">
+              {(data[2]?.value).toLocaleString()} users
+            </p>
           </div>
         </div>
       </div>

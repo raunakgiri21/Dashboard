@@ -1,81 +1,35 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
-  Legend,
   ReferenceLine,
   ResponsiveContainer,
   Cell,
 } from "recharts";
-
-const data = [
-  {
-    name: "Jan",
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Feb",
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Mar",
-    pv: -5800,
-    amt: 2290,
-  },
-  {
-    name: "Apr",
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "May",
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Jun",
-    pv: -3800,
-    amt: 2500,
-  },
-  {
-    name: "Jul",
-    pv: 4300,
-    amt: 2100,
-  },
-  {
-    name: "Aug",
-    pv: -9800,
-    amt: 2290,
-  },
-  {
-    name: "Sep",
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Oct",
-    pv: 4300,
-    amt: 2100,
-  },
-  {
-    name: "Nov",
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Nov",
-    pv: 2400,
-    amt: 2400,
-  },
-];
+import { userTrafficData } from "../../constants/constants";
 
 export default function UserTraffic() {
+  const [data, setData] = useState(userTrafficData);
+
+  useEffect(() => {
+    getUserTrafficData();
+  }, []);
+
+  const getUserTrafficData = async() => {
+    try {
+      const { data: myData } = await axios.get(
+        "https://mocki.io/v1/891633bb-0c12-40e6-bd6e-c99e6594d254"
+      );
+      setData(myData);
+    } catch (error) {
+      console.log("Error getting user traffic data: ", error);
+    }
+  };
+
   return (
     <div className="flex flex-col w-full h-full min-h-[400px] bg-inherit border border-slate-800 rounded-xl shadow-shadowOne py-4 px-5">
       <div className="flex md:flex-row flex-col justify-between md:items-center h-12 w-full">
@@ -134,13 +88,13 @@ export default function UserTraffic() {
               stroke="#000"
             />
             <Bar
-              dataKey="pv"
+              dataKey="amt"
               fill="#8884d8"
             >
               {data.map((entry, index) => {
                 const color =
-                  entry.pv > 0 ? "rgb(59,130,246)" : "rgb(239,68,68)";
-                return <Cell fill={color} />;
+                  entry.amt > 0 ? "rgb(59,130,246)" : "rgb(239,68,68)";
+                return <Cell key={index} fill={color} />;
               })}
             </Bar>
           </BarChart>
